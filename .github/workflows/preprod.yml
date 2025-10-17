@@ -1,0 +1,37 @@
+name: Kelcare Preprod Workflow
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'preprod'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_PREPROD }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_PREPROD }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          registries: ${{ secrets.AWS_ACCOUNT_ID_PREPROD }}
+
+      - name: Build, tag, and push the image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: kelcare-backend
+        run: |
+          docker build --build-arg APP_NAME=$ECR_REPOSITORY --build-arg APP_PORT=3001 -f "Dockerfile" -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          echo "IMAGE latest is pushed to $ECR_REGISTRY/$ECR_REPOSITORY"
+          echo "image_tag=latest"
+          echo "full_image=$ECR_REGISTRY/$ECR_REPOSITORY:latest"
