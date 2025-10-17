@@ -43,7 +43,7 @@ pnpm dev
 
 L’API sera disponible sur :
 ```
-http://localhost:4000/graphql
+http://localhost:[PORT_DEFINI_DANS_ENV]/graphql
 ```
 
 ---
