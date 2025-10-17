@@ -41,7 +41,7 @@ pnpm migration:run
 pnpm dev
 ```
 
-L’API sera disponible sur :
+L’API sera disponible sur (testable via postman) :
 ```
 http://localhost:[PORT_DEFINI_DANS_ENV]/graphql
 ```
