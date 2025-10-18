@@ -1,6 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { TasksService } from './tasks.service'
-import { CreateTaskInput } from './dto'
+import { CreateTaskInput, UpdateTaskInput } from './dto'
 import { TaskFiltersInput } from './dto/input/task-filters.input'
 import { Task } from '../../database/entities'
 
@@ -25,6 +25,15 @@ export class TasksResolver {
     @Args('dto') dto: CreateTaskInput
   ) {
     return this.tasksService.createTask(dto)
+  }
+
+  @Mutation(() => Task, {
+    description: "Permet de mettre à jour un ou plusieurs champs d'une tache"
+  })
+  updateTask(
+    @Args('input') input: UpdateTaskInput
+  ) {
+    return this.tasksService.updateTask(input);
   }
 
 }

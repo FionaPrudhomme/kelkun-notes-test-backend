@@ -29,10 +29,8 @@ export class Task extends Tracking {
   @Field(() => Status, {
     nullable: false
   })
-  @Column({
-    name: 'status',
-    nullable: false
-   })
+  @ManyToOne(() => Status, (u) => u.tasks, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'status_id' })
   status: Status
 
   @Field(() => Project)

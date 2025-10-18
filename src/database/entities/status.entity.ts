@@ -1,6 +1,7 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql'
-import { Column, Entity, Unique, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, Unique, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
 import { Tracking } from './common/tracking.entity'
+import { Task } from './task.entity'
 
 @Entity()
 @ObjectType()
@@ -19,4 +20,10 @@ export class Status extends Tracking {
     unique: true
    })
   name: string
+
+  @Field(() => [Task], { nullable: true })
+  @OneToMany(() => Task, (p) => p.project, {
+    cascade: true
+  })
+  tasks: Task[]
 }
