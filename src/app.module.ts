@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { dataSourceOptionsFactory } from './database/datasource'
 import { UsersModule } from './app/users/users.module'
 import { ProjectsModule } from './app/project/projects.module'
+import { TasksModule } from './app/task/tasks.module'
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { ProjectsModule } from './app/project/projects.module'
     }),
     TypeOrmModule.forRootAsync(dataSourceOptionsFactory()),
     UsersModule,
-    ProjectsModule
+    ProjectsModule, 
+    TasksModule
   ],
   controllers: [],
   providers: []
