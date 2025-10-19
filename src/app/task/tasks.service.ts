@@ -27,6 +27,8 @@ export class TasksService {
     return await Task.create({
       title: dto.title,
       description: dto.description,
+      isArchived: false,
+      archivedAt: undefined,
       project: { id: dto.projectId } as Project,
       status: { id: dto.statusId } as Status,
     }).save();

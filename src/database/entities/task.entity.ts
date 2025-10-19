@@ -26,6 +26,21 @@ export class Task extends Tracking {
   })
   description: string
 
+  @Field(() => Boolean, {
+    nullable: false
+  })
+  @Column({
+    name: 'isArchived', 
+    nullable: false
+  })
+  isArchived: boolean
+
+  @Field(() => Date)
+  @Column({
+    name: 'archivedAt'
+  })
+  archivedAt: Date
+
   @Field(() => Status, {
     nullable: false
   })

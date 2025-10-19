@@ -3,6 +3,7 @@ import { ProjectsService } from './projects.service'
 import { CreateProjectInput } from './dto'
 import { ProjectFiltersInput } from './dto/input/project-filters.input'
 import { Project } from '../../database/entities'
+import { ProjectByIdInput } from './dto/input/project-by-id.input'
 
 @Resolver(() => Project)
 export class ProjectsResolver {
@@ -17,6 +18,15 @@ export class ProjectsResolver {
     @Args('dto') dto: ProjectFiltersInput
   ) {
     return this.projectsService.all(dto)
+  }
+
+  @Query(() => Project, {
+    description :`Retourne le projet avec l'id correspondant`
+  })
+  async findProjectById (
+    @Args('dto') dto: ProjectByIdInput
+  ) {
+    return this.projectsService.findById(dto)
   }
 
   @Mutation(() => Project, {

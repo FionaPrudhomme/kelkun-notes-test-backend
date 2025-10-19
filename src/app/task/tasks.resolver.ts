@@ -12,7 +12,7 @@ export class TasksResolver {
   @Query(() => [Task], {
     description :`Retourne la liste des taches, filtrables par projet`
   })
-  async allProjects (
+  async allTasks (
     @Args('dto') dto: TaskFiltersInput
   ) {
     return this.tasksService.all(dto)
@@ -30,10 +30,10 @@ export class TasksResolver {
   @Mutation(() => Task, {
     description: "Permet de mettre à jour un ou plusieurs champs d'une tache"
   })
-  updateTask(
-    @Args('input') input: UpdateTaskInput
+  async updateTask(
+    @Args('dto') dto: UpdateTaskInput
   ) {
-    return this.tasksService.updateTask(input);
+    return this.tasksService.updateTask(dto);
   }
 
 }
