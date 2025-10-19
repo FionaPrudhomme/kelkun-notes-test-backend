@@ -132,11 +132,17 @@ input TaskFiltersInput {
 }
 
 input UpdateTaskInput {
+  """archivedAt"""
+  archivedAt: DateTime
+
   """Description"""
   description: String
 
   """Identifiant de la tâche à mettre à jour"""
   id: String!
+
+  """isArchived"""
+  isArchived: Boolean
 
   """Identifiant du projet lié à la tache"""
   projectId: String

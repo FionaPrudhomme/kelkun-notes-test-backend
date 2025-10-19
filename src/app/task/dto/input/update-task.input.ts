@@ -1,5 +1,5 @@
 import { InputType, Field, PartialType } from '@nestjs/graphql';
-import { IsUUID } from 'class-validator';
+import { IsBoolean, IsUUID, IsOptional } from 'class-validator';
 import { CreateTaskInput } from './create-task.input';
 
 @InputType()
@@ -9,4 +9,20 @@ export class UpdateTaskInput extends PartialType(CreateTaskInput) {
   })
   @IsUUID('4', { message: `L'identifiant de la tâche doit être un UUID valide.` })
   id: string;
+
+  @Field({
+    description: `isArchived`,
+    nullable: true
+  })
+  @IsOptional()
+  @IsBoolean()
+  isArchived?: boolean
+  
+  @Field({
+    description: `archivedAt`,
+    nullable: true
+  })
+  @IsOptional()
+  @IsBoolean()
+  archivedAt?: Date
 }

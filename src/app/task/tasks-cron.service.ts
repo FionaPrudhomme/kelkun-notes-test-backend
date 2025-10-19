@@ -15,18 +15,6 @@ export class TasksCronService {
 
     const fifteenMinutesAgo = new Date(Date.now() - 15 * 60 * 1000);
 
-    // Récupère les tâches non archivées créées il y a + de 15 min
-    const oldTasks = await Task.find({
-      where: {
-        isArchived: false,
-        createdAt: LessThan(fifteenMinutesAgo),
-      },
-    });
-
-    if (oldTasks.length === 0) {
-      this.logger.debug('Aucune tâche à archiver.');
-      return;
-    }
 
     // Mets à jour les tâches
     await Task.update(
@@ -40,6 +28,6 @@ export class TasksCronService {
       },
     );
 
-    this.logger.warn(`${oldTasks.length} tâche(s) archivées.`);
+    this.logger.debug(`tâche(s) archivées.`);
   }
 }
