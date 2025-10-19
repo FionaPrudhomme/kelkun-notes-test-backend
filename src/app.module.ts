@@ -8,6 +8,7 @@ import { UsersModule } from './app/users/users.module'
 import { ProjectsModule } from './app/project/projects.module'
 import { TasksModule } from './app/task/tasks.module'
 import { StatusModule } from './app/status/status.module'
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { StatusModule } from './app/status/status.module'
     UsersModule,
     ProjectsModule, 
     TasksModule, 
-    StatusModule
+    StatusModule, 
+    ScheduleModule.forRoot()
   ],
   controllers: [],
   providers: []

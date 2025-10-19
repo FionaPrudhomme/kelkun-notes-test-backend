@@ -6,7 +6,9 @@ import { Project, Status, Task } from '../../database/entities'
 @Injectable()
 export class TasksService {
   async all (dto: TaskFiltersInput) {
-    const where: any = {}
+    const where: any = {
+      isArchived: false
+    }
 
     if (dto.projectId) {
       where.project = { id: dto.projectId }
@@ -16,7 +18,7 @@ export class TasksService {
       where,
       order: {
         status: {
-          id: 'DESC'
+          name: 'ASC'
         }
       },
       relations: {
