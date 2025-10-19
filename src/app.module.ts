@@ -7,6 +7,7 @@ import { dataSourceOptionsFactory } from './database/datasource'
 import { UsersModule } from './app/users/users.module'
 import { ProjectsModule } from './app/project/projects.module'
 import { TasksModule } from './app/task/tasks.module'
+import { StatusModule } from './app/status/status.module'
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { TasksModule } from './app/task/tasks.module'
     TypeOrmModule.forRootAsync(dataSourceOptionsFactory()),
     UsersModule,
     ProjectsModule, 
-    TasksModule
+    TasksModule, 
+    StatusModule
   ],
   controllers: [],
   providers: []

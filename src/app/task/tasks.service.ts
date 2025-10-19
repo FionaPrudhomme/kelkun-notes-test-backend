@@ -15,22 +15,29 @@ export class TasksService {
     return Task.find({
       where,
       order: {
-        createdAt: 'DESC'
+        status: {
+          id: 'DESC'
+        }
       },
       relations: {
-        project: true
+        project: true, 
+        status: true
       }
     })
   }
 
-  async createTask (dto: CreateTaskInput) {
+  async createTask(dto: CreateTaskInput) {
+    const defaultStatus = await Status.findOneBy({ name: 'À faire' });
+    if (!defaultStatus) {
+      throw new Error('Le statut "À faire" n’existe pas en base.');
+    }
     return await Task.create({
       title: dto.title,
       description: dto.description,
       isArchived: false,
-      archivedAt: undefined,
+      archivedAt: null,
       project: { id: dto.projectId } as Project,
-      status: { id: dto.statusId } as Status,
+      status: defaultStatus,
     }).save();
   }
 

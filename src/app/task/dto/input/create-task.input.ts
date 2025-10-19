@@ -19,7 +19,7 @@ export class CreateTaskInput {
   })
   @IsOptional()
   @IsString({ message: 'validation.isString' })
-  description: string
+  description?: string
 
 
   @Field(() => String, {
@@ -32,7 +32,7 @@ export class CreateTaskInput {
   @Field(() => String, {
     description: `Identifiant du statut de la tache`
   })
+  @IsOptional()
   @IsUUID('4', { message: `L'identifiant du statut doit être un UUID valide.` })
-  @EntityExist(Status, { message: `Ce statut n'existe pas` })
-  statusId: string
+  statusId?: string
 }

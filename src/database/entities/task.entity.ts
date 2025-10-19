@@ -20,9 +20,12 @@ export class Task extends Tracking {
    })
   title: string
 
-  @Field(() => String)
+  @Field(() => String, {
+    nullable: true
+  })
   @Column({
-    name: 'description'
+    name: 'description', 
+    nullable: true
   })
   description: string
 
@@ -35,9 +38,12 @@ export class Task extends Tracking {
   })
   isArchived: boolean
 
-  @Field(() => Date)
+  @Field(() => Date, {
+    nullable: true
+  })
   @Column({
-    name: 'archivedAt'
+    name: 'archivedAt', 
+    nullable: true
   })
   archivedAt: Date
 
@@ -48,7 +54,9 @@ export class Task extends Tracking {
   @JoinColumn({ name: 'status_id' })
   status: Status
 
-  @Field(() => Project)
+  @Field(() => Project, {
+    nullable: false
+  })
   @ManyToOne(() => Project, (u) => u.tasks, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'project_id' })
   project: Project

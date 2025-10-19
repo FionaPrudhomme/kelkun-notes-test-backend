@@ -80,6 +80,9 @@ type Query {
   """Retourne la liste des projets, filtrables par utilisateur"""
   allProjects(dto: ProjectFiltersInput!): [Project!]!
 
+  """Retourne la liste des status"""
+  allStatus: [Status!]!
+
   """Retourne la liste des taches, filtrables par projet"""
   allTasks(dto: TaskFiltersInput!): [Task!]!
 
@@ -105,14 +108,14 @@ type Status {
 }
 
 type Task {
-  archivedAt: DateTime!
+  archivedAt: DateTime
 
   """Date de création (UTC, immuable)"""
   createdAt: DateTime!
 
   """Date de suppression (UTC)"""
   deletedAt: DateTime
-  description: String!
+  description: String
   id: ID!
   isArchived: Boolean!
   project: Project!
