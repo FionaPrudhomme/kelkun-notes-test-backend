@@ -38,14 +38,14 @@ export class Task extends Tracking {
   })
   isArchived: boolean
 
-  @Field(() => Date, {
-    nullable: true
-  })
+
+  @Field(() => Date, { nullable: true })
   @Column({
-    name: 'archivedAt', 
-    nullable: true
+    name: 'archivedAt',
+    type: 'timestamptz', // ✅ UTC
+    nullable: true,
   })
-  archivedAt: Date
+  archivedAt: Date;
 
   @Field(() => Status, {
     nullable: false

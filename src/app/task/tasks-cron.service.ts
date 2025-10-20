@@ -12,8 +12,9 @@ export class TasksCronService {
   @Cron(CronExpression.EVERY_MINUTE)
   async archiveOldTasks() {
     this.logger.debug('Vérification des tâches à archiver...');
-
-    const fifteenMinutesAgo = new Date(Date.now() - 15 * 60 * 1000);
+    
+    const nowUtc = new Date();
+    const fifteenMinutesAgo = new Date(nowUtc.getTime() - 15 * 60 * 1000);
 
 
     // Mets à jour les tâches
@@ -24,7 +25,7 @@ export class TasksCronService {
       },
       {
         isArchived: true,
-        archivedAt: new Date(),
+        archivedAt: nowUtc,
       },
     );
 
