@@ -129,6 +129,9 @@ type Task {
 input TaskFiltersInput {
   """Identifiant du projet"""
   projectId: String
+
+  """Filtre optionnel par statut"""
+  statusId: String
 }
 
 input UpdateTaskInput {

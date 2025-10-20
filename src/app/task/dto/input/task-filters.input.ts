@@ -15,4 +15,12 @@ export class TaskFiltersInput {
   @EntityExist(Project, { message: `Ce projet n'existe pas` })
   projectId: string
 
+  @Field(() => String, {
+    description: 'Filtre optionnel par statut',
+    nullable: true,
+  })
+  @IsOptional()
+  @IsUUID('4', { message: `L'identifiant du projet doit être un UUID valide.` })
+  statusId?: string;
+
 }

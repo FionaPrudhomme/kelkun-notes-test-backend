@@ -14,6 +14,10 @@ export class TasksService {
       where.project = { id: dto.projectId }
     }
 
+    if (dto.statusId) {
+      where.status = { id: dto.statusId }
+    }
+
     return Task.find({
       where,
       order: {
